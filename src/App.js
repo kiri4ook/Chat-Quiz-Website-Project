@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchDataRequest } from './actions/actions';
+import React from 'react';
+import AppRouter from './modules/appRouter/AppRouter';
+
 
 function App() {
-  const data = useSelector(state => state.data);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchDataRequest());
-  }, [dispatch]);
   return (
-    <>
-    </>
+    <div>
+      <AppRouter />
+    </div>
   );
 }
 
