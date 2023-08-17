@@ -1,18 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Main from '../main/Main';
 import Login from '../Login/Login';
 
 function AppRouter() {
+
     return (
-        <Router>
-            <Routes>
-                <Route path="/" exact component={Login} />
-                <Route path="/main" component={Main} />
-            </Routes>
-        </Router>
+        <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/main" element={<Main />} />
+        </Routes>
+
 
     );
 }
 
 export default AppRouter;
+

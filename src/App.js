@@ -1,13 +1,17 @@
 import React from 'react';
 import AppRouter from './modules/appRouter/AppRouter';
+import Navbar from './modules/navbar/Navbar';
+import { BrowserRouter } from 'react-router-dom';
 
 
 function App() {
   return (
-    <div>
+    <BrowserRouter>
+      <Navbar />
       <AppRouter />
-    </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+

@@ -1,4 +1,10 @@
+import { all } from 'redux-saga/effects';
+import userSaga from './userSaga';
 
-export default function* rootSaga() {
-    yield console.log('Hello saga')
+function* rootSaga() {
+    yield all([
+        userSaga(),
+    ]);
 }
+
+export default rootSaga;

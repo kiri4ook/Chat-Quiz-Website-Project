@@ -24,3 +24,4 @@ export const fetchUserFailure = (payload) => ({
     type: FETCH_USER_FAILURE,
     payload,
 })
+
