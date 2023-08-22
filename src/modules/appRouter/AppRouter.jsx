@@ -10,8 +10,6 @@ function AppRouter() {
             <Route path="/" element={<Login />} />
             <Route path="/main" element={<Main />} />
         </Routes>
-
-
     );
 }
 

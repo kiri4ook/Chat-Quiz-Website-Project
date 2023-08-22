@@ -1,25 +1,25 @@
-export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
 export const FETCH_MESSAGES_REQUEST = 'FETCH_MESSAGES_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
 
-export const addMessage = (payload) => ({
-    type: ADD_MESSAGE,
-    payload,
+export const addMessage = (updatedMessages) => ({
+    type: UPDATE_MESSAGE,
+    payload: updatedMessages,
 })
 
-export const fetchMessagesRequest = (payload) => ({
+export const fetchMessagesRequest = (messageId) => ({
     type: FETCH_MESSAGES_REQUEST,
-    payload,
+    payload: messageId,
 })
 
-export const fetchMessagesSuccess = (payload) => ({
+export const fetchMessagesSuccess = (messageData) => ({
     type: FETCH_MESSAGES_SUCCESS,
-    payload,
+    payload: messageData,
 })
 
-export const fetchMessagesFailure = (payload) => ({
+export const fetchMessagesFailure = (error) => ({
     type: FETCH_MESSAGES_FAILURE,
-    payload,
+    error: error,
 })
 

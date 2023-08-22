@@ -1,8 +1,9 @@
 import React from 'react';
 import { auth, Firebase } from '../../firebase/firebaseConfig';
-import { setUser } from '../../store/actions/userAction';
+import { fetchUserRequest, fetchUserSuccess } from '../../store/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import './style.scss';
 
 function Login() {
     const dispatch = useDispatch();
@@ -12,21 +13,22 @@ function Login() {
         const provider = new Firebase.auth.GoogleAuthProvider();
         try {
             const result = await auth.signInWithPopup(provider);
-            console.log(result);
             if (result.user) {
                 const userId = result.user.uid;
-                const usersRef = Firebase.firestore().collection('users');
+                const userEmail = result.user.email;
+                const userName = result.user.displayName;
                 const userData = {
                     id: userId,
+                    email: userEmail,
+                    name: userName
 
                 };
-                const docRef = await usersRef.add(userData);
-                const docId = docRef.id;
+                const usersRef = Firebase.firestore().collection('users').add(userData);
+                const docId = (await usersRef).id;
                 localStorage.setItem('userId', userId);
                 localStorage.setItem('docId', docId);
-                console.log(userId);
-                console.log(docId);
-                dispatch(setUser({ id: userId, docId }));
+                dispatch(fetchUserRequest(docId));
+                dispatch(fetchUserSuccess())
                 navigate('/main');
             }
         } catch (error) {
@@ -35,9 +37,8 @@ function Login() {
     };
 
     return (
-        <div>
-            Login
-            <button onClick={handleGoogleLogin}>Войти через Google</button>
+        <div className='login-wrapper'>
+            <button className='login-btn' onClick={handleGoogleLogin}>Login with Google</button>
         </div>
     );
 }

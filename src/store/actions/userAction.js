@@ -12,9 +12,9 @@ export const clearUser = (payload) => ({
     type: CLEAR_USER,
     payload,
 })
-export const fetchUserRequest = (payload) => ({
+export const fetchUserRequest = (docId) => ({
     type: FETCH_USER_REQUEST,
-    payload,
+    payload: docId,
 })
 export const fetchUserSuccess = (payload) => ({
     type: FETCH_USER_SUCCESS,

@@ -3,6 +3,10 @@ import { useDispatch } from 'react-redux';
 import { Firebase } from '../../firebase/firebaseConfig';
 import { clearUser } from '../../store/actions/userAction';
 import { useNavigate } from 'react-router-dom';
+import { Layout, Button } from 'antd';
+import './style.scss';
+
+const { Header } = Layout;
 
 function Navbar() {
     const dispatch = useDispatch();
@@ -24,8 +28,11 @@ function Navbar() {
     };
 
     return (
-        <button onClick={handleLogout}>Выход</button>
+        <Header>
+            <Button className='Button' onClick={handleLogout}>LogOut</Button>
+        </Header>
     );
 }
 
 export default Navbar;
+

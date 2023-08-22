@@ -1,31 +1,15 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import firestore from '../../firebase/firebaseConfig';
-import { setUser, fetchUserFailure, FETCH_USER_REQUEST } from '../actions/userAction';
-
-const fetchUserFromFirebase = async (userId) => {
-    try {
-        const userDocRef = firestore.collection('users').doc(userId);
-        const userDoc = await userDocRef.get();
-
-        if (userDoc.exists) {
-            const user = userDoc.data();
-            return user;
-        } else {
-            throw new Error('User not found');
-        }
-    } catch (error) {
-        throw error;
-    }
-};
+import { setUser, fetchUserFailure, fetchUserSuccess, FETCH_USER_REQUEST } from '../actions/userAction';
+import { fetchUserFromFirebase } from '../../firebase/firebaseMethods';
 
 function* fetchUser(action) {
     try {
-        const userId = action.payload.userId;
-        console.log('Fetching user with ID:', userId);
-        const user = yield call(fetchUserFromFirebase, userId);
+        const docId = action.payload;
+        console.log(docId);
+        const user = yield call(fetchUserFromFirebase, docId);
+        yield put(fetchUserSuccess(user));
         yield put(setUser(user));
     } catch (error) {
-        console.error('Error fetching user:', error);
         yield put(fetchUserFailure(error.message));
     }
 }

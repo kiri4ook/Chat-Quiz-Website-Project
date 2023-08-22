@@ -1,0 +1,34 @@
+body {
+    overflow: hidden;
+}
+
+.login-wrapper {
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9d9d9d;
+
+}
+
+.login-btn {
+    width: 20%;
+    height: 7%;
+    font-size: 25px;
+    border-radius: 10px;
+    border: none;
+    background-color: #171427;
+    color: #3ee3cd;
+    cursor: pointer;
+
+    &:hover {
+        width: 21%;
+        height: 8%;
+        font-size: 27px;
+    }
+
+    &:active {
+        background-color: #25213d;
+        color: #077b6c;
+    }
+}
