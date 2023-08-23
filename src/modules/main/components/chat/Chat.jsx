@@ -46,9 +46,8 @@ function Chat() {
                 <Content className='layout-content'>
                     <div className='message-window' ref={messagesContainerRef}>
                         {sortedMessages.map((message, index) => (
-                            <div className={`${message.uid === user?.uid ? '' : 'self-message'}`}>
+                            <div key={index} className={`${message.uid === user?.uid ? '' : 'self-message'}`}>
                                 <UserMessage
-                                    key={index}
                                     displayName={message.displayName}
                                     text={message.text}
                                     photoURL={message.photoUrl}

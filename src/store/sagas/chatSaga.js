@@ -5,7 +5,6 @@ import { sendMessageRequest } from '../../firebase/firebaseMethods';
 function* sendMessage() {
     try {
         const response = yield call(sendMessageRequest);
-        console.log(response)
         yield put(fetchMessagesSuccess(response));
     } catch (error) {
         console.error(error)

@@ -5,7 +5,6 @@ import { fetchUserFromFirebase } from '../../firebase/firebaseMethods';
 function* fetchUser(action) {
     try {
         const docId = action.payload;
-        console.log(docId);
         const user = yield call(fetchUserFromFirebase, docId);
         yield put(fetchUserSuccess(user));
         yield put(setUser(user));

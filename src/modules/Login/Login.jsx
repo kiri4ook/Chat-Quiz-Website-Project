@@ -28,7 +28,6 @@ function Login() {
                 localStorage.setItem('userId', userId);
                 localStorage.setItem('docId', docId);
                 dispatch(fetchUserRequest(docId));
-                dispatch(fetchUserSuccess())
                 navigate('/main');
             }
         } catch (error) {
