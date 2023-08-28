@@ -1,11 +1,29 @@
 import React from 'react';
 import ReadyForQuiz from './components/readyForQuiz/ReadyForQuiz';
+import Game from './components/game';
+import Results from './components/results';
+import ReadyForGame from './components/readyForGame/ReadyForGame';
+import './style.scss';
 
-const Quiz = () => {
-
+const Quiz = ({
+    isShowResults,
+    isQuizInProcess,
+    setIsReadyForGame,
+    isUserReadyToStartQuiz,
+}) => {
     return (
-        <div>
-            <ReadyForQuiz />
+        <div className='quiz-wrapper'>
+            {isQuizInProcess ?
+                !isShowResults ?
+                    <Game />
+                    :
+                    <Results />
+                :
+                <ReadyForGame
+                    callback={setIsReadyForGame}
+                    isUserReadyToStartQuiz={isUserReadyToStartQuiz}
+                />
+            }
         </div>
     );
 };

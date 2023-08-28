@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserReadyToStartQuiz } from '../../../../../../store/actions/quizAction'; // Укажите правильный путь
+import { fetchUserReadyToStartQuiz, fetchQuestionsRequest, deleteQuestions } from '../../../../../../store/actions/quizAction';
+
+
+
 
 const ReadyForQuiz = () => {
     const dispatch = useDispatch();
     const isUserReadyToStartQuiz = useSelector(state => state.quizState.isUserReadyToStartQuiz);
+
+    useEffect(() => {
+        async function startQuizIfPossible() {
+            dispatch(fetchQuestionsRequest());
+        }
+
+        startQuizIfPossible();
+    }, [isUserReadyToStartQuiz]);
+
     const toggleUserReady = () => {
         dispatch(fetchUserReadyToStartQuiz(!isUserReadyToStartQuiz));
     };

@@ -1,15 +1,11 @@
 import React from 'react';
 import Quiz from './components/quiz/Quiz';
 import Chat from './components/chat/Chat';
-import { useDispatch } from 'react-redux';
-import { fetchUserSuccess, fetchUserRequest } from '../../store/actions/userAction';
+import './style.scss';
 
 function Main() {
-    const dispatch = useDispatch()
-    const docId = localStorage.getItem('docId');
-    dispatch(fetchUserRequest(docId))
     return (
-        <div>
+        <div className='chat-quiz-wrapper'>
             <Quiz />
             <Chat />
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { auth, Firebase } from '../../firebase/firebaseConfig';
-import { fetchUserRequest, fetchUserSuccess } from '../../store/actions/userAction';
+import { fetchUserRequest } from '../../store/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';

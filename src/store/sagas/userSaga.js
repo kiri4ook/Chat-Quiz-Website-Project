@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { setUser, fetchUserFailure, fetchUserSuccess, FETCH_USER_REQUEST } from '../actions/userAction';
-import { fetchUserFromFirebase } from '../../firebase/firebaseMethods';
+import { fetchUserFromFirebase } from '../../firebase/firebaseMethods/userMethods';
 
 function* fetchUser(action) {
     try {

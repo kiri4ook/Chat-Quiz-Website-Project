@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { fetchMessagesSuccess, fetchMessagesFailure, FETCH_MESSAGES_REQUEST } from '../actions/chatActions';
-import { sendMessageRequest } from '../../firebase/firebaseMethods';
+import { sendMessageRequest } from '../../firebase/firebaseMethods/chatMethods';
 
 function* sendMessage() {
     try {
