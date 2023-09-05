@@ -1,21 +1,50 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { setUser, fetchUserFailure, fetchUserSuccess, FETCH_USER_REQUEST } from '../actions/userAction';
-import { fetchUserFromFirebase } from '../../firebase/firebaseMethods/userMethods';
+import { takeEvery, select, call, put } from 'redux-saga/effects';
+import * as actions from './../actions/userAction';
+import * as firebaseAuthMethods from '../../firebase/firebaseMethods/userMethods';
+import * as firebaseQuizMethods from '../../firebase/firebaseMethods/quizMethods';
 
-function* fetchUser(action) {
+const getDocId = state => state.userState.userDocId;
+const getUserId = state => state.userState.userId;
+const getUserReadinessDocId = state => state.quizState.currentUserReadiness[0]?.userReadinessDocId;
+
+export default function* firebaseAuthSaga() {
+    yield takeEvery(actions.SIGN_OUT, singOut);
+    yield takeEvery(actions.SIGN_IN_WITH_GOOGLE, singIn);
+}
+
+export function* singIn() {
+    const userId = yield select(getUserId);
+
+    if (!!userId) {
+        return
+    }
+
     try {
-        const docId = action.payload;
-        const user = yield call(fetchUserFromFirebase, docId);
-        yield put(fetchUserSuccess(user));
-        yield put(setUser(user));
+        const { uid, docId } = yield call(firebaseAuthMethods.getFirebaseSignInRequest);
+
+        yield put(actions.setAuthUserStore(uid));
+        yield put(actions.setAuthUserDatabaseIdStore(docId));
+        yield put(actions.setDataToLocalStorage({ fieldType: 'authData', data: { uid, docId } }));
     } catch (error) {
-        yield put(fetchUserFailure(error.message));
+        console.error('error', error)
     }
 }
 
-function* userSaga() {
-    yield takeEvery(FETCH_USER_REQUEST, fetchUser);
-}
+export function* singOut() {
+    const docId = yield select(getDocId);
+    const userReadinessDocId = yield select(getUserReadinessDocId);
 
-export default userSaga;
+    userReadinessDocId && (yield call(firebaseQuizMethods.deleteFromCollectionByDocIdRequest, {
+        type: 'usersReadiness',
+        docId: userReadinessDocId,
+    }));
+
+    try {
+        yield call(firebaseAuthMethods.firebaseSignOut, docId);
+        yield put(actions.setAuthUserStore(''));
+        yield put(actions.removeDataFromLocalStorage());
+    } catch (error) {
+        console.error('error', error)
+    }
+}
 

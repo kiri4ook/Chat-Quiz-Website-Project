@@ -1,5 +1,23 @@
 import firestore, { auth } from "../firebaseConfig";
 
+export const addQuestionsToFirestore = async (questions) => {
+    let questionsDocId = '';
+    try {
+        const questionsRef = firestore.collection('questions');
+        const query = await questionsRef.get();
+        if (query.docs.length === 0) {
+            await questionsRef.add({ questions: questions })
+                .then(docRef => questionsDocId = docRef.id);
+        }
+
+        return questionsDocId;
+
+    } catch (error) {
+        console.error('Error adding questions to Firestore:', error);
+        throw error;
+    }
+};
+
 export const sendAddUserReadinessRequest = async () => {
     const user = auth.currentUser;
 
@@ -17,7 +35,6 @@ export const sendAddUserReadinessRequest = async () => {
         })
             .then(docRef => userReadinessDocId = docRef.id);
     }
-
     return { uid: user.uid, userReadinessDocId };
 };
 
@@ -62,26 +79,9 @@ export const checkIsUsersReadyToStartQuiz = async () => {
     }
 };
 
-export const addQuestionsToFirestore = async (questions) => {
-    let questionsDocId = '';
-    try {
-        const questionsRef = firestore.collection('questions');
-        const query = await questionsRef.get();
-        if (query.docs.length === 0) {
-            await questionsRef.add({ questions: questions })
-                .then(docRef => questionsDocId = docRef.id);
-        }
-
-        return questionsDocId;
-
-    } catch (error) {
-        console.error('Error adding questions to Firestore:', error);
-        throw error;
-    }
-};
-
 export const deleteFromCollectionByDocIdRequest = async ({ type, docId }) => {
     const fireBaseUserRef = firestore.collection(type);
 
     await fireBaseUserRef.doc(docId).delete();
 };
+

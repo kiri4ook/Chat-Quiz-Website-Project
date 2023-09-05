@@ -1,0 +1,63 @@
+.results-wrapper {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2c2d32;
+    position: relative;
+  }
+  
+  .scores-container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    user-select: none;
+  }
+  
+  .scores-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 20px 2px;
+  }
+  
+  .user {
+    color: white;
+    font-size: 14px;
+  }
+  
+  .scores {
+    color: white;
+    font-size: 14px;
+  }
+  
+  .button-wrapper {
+    width: 220px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .button {
+    display: flex;
+    border: 2px solid #56bab7;
+    border-radius: 3px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 20px;
+    user-select: none;
+    cursor: pointer;
+    color: #56bab7;
+    font-size: 24px;
+}
+
+.button:active {
+    background: #56bab7;
+    color: black;
+}

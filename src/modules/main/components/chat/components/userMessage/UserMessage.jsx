@@ -1,21 +1,31 @@
 import React from 'react';
-import { Avatar } from 'antd';
-import './style.scss';
-import { auth } from '../../../../../../firebase/firebaseConfig';
+import './styles.scss';
 
-function UserMessage({ displayName, text, photoURL, message }) {
-    const user = auth.currentUser;
-
+const UserMessage = ({
+    userId,
+    message,
+}) => {
+    const isSelfMessage = userId === message.uid;
     return (
-        <div className='user-message-container'>
-            <div className={`${message.uid === user?.uid ? 'user-message' : 'self-message'}`}>
-                <Avatar size={64} src={photoURL} />
-                <div>{displayName}</div>
-                <div className='message-text'>{text}</div>
+        <div
+            className={`user-message-wrapper ${isSelfMessage ? 'self-message' : ''}`}
+        >
+            <div className="message-info">
+                <img
+                    src={message.photoURL}
+                    alt="User Photo"
+                    className="user-photo"
+                />
+                <div className="message-name">
+                    <span className="name">{message.displayName}</span>
+                </div>
             </div>
-        </div >
+            <div className="message-container">
+                <span className="message-text">{message.text}</span>
+            </div>
+        </div>
     );
-}
+};
 
 export default UserMessage;
 

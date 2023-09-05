@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    Scores,
-    UserName,
-    ScoresWrapper,
-} from './styledComponents';
-import CustomImage from '../../../../../../../customComponents/customImage/CustomImage';
+import './styles.scss';
 
 const UserScores = ({
     name,
@@ -12,21 +7,19 @@ const UserScores = ({
     scores,
 }) => {
     return (
-        <ScoresWrapper>
-            <CustomImage
-                image={image}
-                width={'25px'}
-                height={'25px'}
-                borderRadius={'50px'}
-            />
-            <UserName
-                children={name}
-            />
-            <Scores
-                children={scores}
-            />
-        </ScoresWrapper>
+        <div className="scores-wrapper">
+            <div className="image-wrapper">
+                <img
+                    src={image}
+                    className="user-image"
+                />
+            </div>
+
+            <span className="user-name">{name}</span>
+            <span className="scores">{scores}</span>
+        </div>
     );
 };
 
 export default UserScores;
+

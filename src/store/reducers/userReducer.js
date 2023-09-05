@@ -1,40 +1,26 @@
-import { SET_USER, CLEAR_USER, FETCH_USER_REQUEST, FETCH_USER_SUCCESS, FETCH_USER_FAILURE } from "../actions/userAction";
+import * as actions from "../actions/userAction";
 
 const initialState = {
-    user: null,
-    loading: false,
-    error: null,
+    userId: '',
+    userDocId: '',
 };
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_USER:
+        case actions.SET_AUTH_USER_STORE:
             return {
                 ...state,
-                user: action.payload,
+                userId: action.payload,
             };
-        case CLEAR_USER:
+        case actions.SET_AUTH_USER_DATABASE_ID_STORE:
             return {
                 ...state,
-                user: null,
+                userDocId: action.payload,
             };
-        case FETCH_USER_REQUEST:
+        case actions.SET_USER_DATA_FROM_LOCAL_STORAGE_STORE:
             return {
                 ...state,
-                loading: true,
-                error: null,
-            };
-        case FETCH_USER_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                user: action.payload,
-            };
-        case FETCH_USER_FAILURE:
-            return {
-                ...state,
-                loading: false,
-                error: action.error,
+                ...action.payload,
             };
         default:
             return state;

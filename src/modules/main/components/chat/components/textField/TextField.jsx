@@ -1,12 +1,7 @@
 import React, { useRef, useState } from 'react';
-import {
-    TextField,
-    TextFieldButton,
-    TextFieldWrapper,
-    TextFieldContainer,
-} from './styledComponents';
+import './styles.scss';
 
-const CustomTextField = ({
+const TextField = ({
     sendMessage,
 }) => {
     const [value, setValue] = useState('');
@@ -40,22 +35,25 @@ const CustomTextField = ({
     };
 
     return (
-        <TextFieldContainer>
-            <TextFieldWrapper>
-                <TextField
+        <div className="text-field-container">
+            <div className="text-field-wrapper">
+                <textarea
                     ref={textRef}
                     value={value}
                     onChange={onChangeHandler}
                     onKeyDown={handleOnFocus}
                     placeholder={'Send a message...'}
+                    className="text-field"
                 />
-            </TextFieldWrapper>
-            <TextFieldButton
+            </div>
+            <div
+                className="text-field-button"
                 onClick={onClickHandler}
-                children={'SEND'}
-            />
-        </TextFieldContainer>
+            >
+                SEND
+            </div>
+        </div>
     );
 };
 
-export default CustomTextField;
+export default TextField;

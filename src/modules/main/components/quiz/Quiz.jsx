@@ -1,8 +1,10 @@
 import React from 'react';
-import ReadyForQuiz from './components/readyForQuiz/ReadyForQuiz';
-import Game from './components/game';
-import Results from './components/results';
-import ReadyForGame from './components/readyForGame/ReadyForGame';
+import { connect } from 'react-redux';
+import * as actions from '../../../../store/actions/quizAction';
+import * as selectors from '../../Main';
+import Game from './components/game/Game';
+import Results from './components/results/Results';
+import ReadyForGame from './components/readyForQuiz/ReadyForQuiz';
 import './style.scss';
 
 const Quiz = ({
@@ -28,5 +30,16 @@ const Quiz = ({
     );
 };
 
-export default Quiz;
+const mapStateToProps = state => ({
+    isShowResults: selectors.getIsShowResults(state),
+    isQuizInProcess: selectors.isQuizInProcess(state),
+    isUserReadyToStartQuiz: selectors.getIsUserReadyToStartQuiz(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+    setIsReadyForGame: payload => dispatch(actions.setIsReadyForGame(payload)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
 

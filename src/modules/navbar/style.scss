@@ -1,14 +1,15 @@
-Header {
+.Header {
     width: 100vw;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
+    background-color: #0d121c;
 }
 
 .Button {
     border: none;
     font-size: 30px;
     color: azure;
-    background-color: #000e29;
+    background-color: #0d121c;
     height: 50px;
 }

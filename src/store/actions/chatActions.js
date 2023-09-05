@@ -1,25 +1,17 @@
-export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
-export const FETCH_MESSAGES_REQUEST = 'FETCH_MESSAGES_REQUEST';
-export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
-export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
+export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const SET_USERS_MESSAGES_STORE = 'SET_USERS_MESSAGES_STORE';
+export const SET_USER_MESSAGE = 'SET_USER_MESSAGE';
 
-export const addMessage = (updatedMessages) => ({
-    type: UPDATE_MESSAGE,
-    payload: updatedMessages,
+
+export const sendMessage = payload => ({
+    type: SEND_MESSAGE,
+    payload,
 })
-
-export const fetchMessagesRequest = (messageId) => ({
-    type: FETCH_MESSAGES_REQUEST,
-    payload: messageId,
+export const setUsersMessagesStore = payload => ({
+    type: SET_USERS_MESSAGES_STORE,
+    payload,
 })
-
-export const fetchMessagesSuccess = (messageData) => ({
-    type: FETCH_MESSAGES_SUCCESS,
-    payload: messageData,
+export const setUserMessage = payload => ({
+    type: SET_USER_MESSAGE,
+    payload,
 })
-
-export const fetchMessagesFailure = (error) => ({
-    type: FETCH_MESSAGES_FAILURE,
-    error: error,
-})
-

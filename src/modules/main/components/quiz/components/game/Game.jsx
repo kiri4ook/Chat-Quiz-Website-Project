@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {
-    GameWindow,
-    GameWrapper,
-    QuestionText,
-    AnswerButtons,
-    QuestionWrapper,
-    AnswerResultImages,
-} from './styledComponents';
-import CustomImage from '../../../../../../modules/customComponents/customImage/CustomImage';
-import CustomButton from '../../../../../../modules/customComponents/customButton/CustomButton';
+import './styles.scss';
 import correctAnswerImage from '../../../../../../images/correct-answer-image.svg.png';
 import notCorrectAnswerImage from '../../../../../../images/not-correct-answer-image.png';
-import colors from '../../../../../../themeManager/colors';
+import { connect } from 'react-redux';
+import * as actions from '../../../../../../store/actions/quizAction';
+import * as selectors from '../../../../Main';
 
 const Game = ({
     text,
@@ -34,52 +27,65 @@ const Game = ({
         setAnswersListStore(isCorrectAnswer);
         isCorrectAnswer && setCorrectAnswersCountStore();
     };
-
     return (
-        <GameWrapper>
-            {answerResultList.length ?
-                <AnswerResultImages>
-                    {answerResultList.map((item, i) => {
-                        return item
-                            ? <CustomImage
+        <div className="game-wrapper">
+            {answerResultList.length ? (
+                <div className="answer-result-images">
+                    {answerResultList.map((item, i) => (
+                        item ? (
+                            <div
                                 key={i}
-                                image={correctAnswerImage}
-                                width={'31px'}
-                                height={'31px'}
-                                padding={'5px'}
-                            />
-                            : <CustomImage
+                                className="image-wrapper"
+                            >
+                                <img
+                                    src={correctAnswerImage}
+                                    alt="Correct Answer"
+                                    className="image"
+                                />
+                            </div>
+                        ) : (
+                            <img
                                 key={i}
-                                image={notCorrectAnswerImage}
-                                width={'31px'}
-                                height={'31px'}
-                                padding={'5px'}
+                                src={notCorrectAnswerImage}
+                                alt="Not Correct Answer"
+                                className="image"
                             />
-                    })}
-                </AnswerResultImages>
-                :
-                null
-            }
-            <GameWindow>
-                <QuestionWrapper>
-                    <QuestionText
-                        children={text}
-                    />
-                </QuestionWrapper>
-                <AnswerButtons>
-                    {answers?.map((answer, i) =>
-                        <CustomButton
+                        )
+                    ))}
+                </div>
+            ) : null}
+            <div className="game-window">
+                <div className="question-wrapper">
+                    <span className="question-text">{text}</span>
+                </div>
+                <div className="answer-buttons">
+                    {answers?.map((answer, i) => (
+                        <button
                             key={i}
-                            text={answer}
-                            isDisabled={isDisabled}
-                            callback={() => handleClick(answer)}
-                            activeBackgroundColor={answer !== correctAnswer && `${colors.wrongAnswerBgColor}`}
-                        />
-                    )}
-                </AnswerButtons>
-            </GameWindow>
-        </GameWrapper>
+                            onClick={() => handleClick(answer)}
+                            className={`button ${answer !== correctAnswer ? 'wrong-answer' : ''} ${isDisabled ? 'disabled' : ''}`}
+                            disabled={isDisabled}
+                        >
+                            {answer}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 };
 
-export default Game;
+const mapStateToProps = state => ({
+    text: selectors.textSelector(state),
+    answers: selectors.answersSelector(state),
+    correctAnswer: selectors.correctAnswerSelector(state),
+    answerResultList: selectors.getAnswerResultList(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+    setAnswersListStore: payload => dispatch(actions.setAnswersListStore(payload)),
+    setCorrectAnswersCountStore: () => dispatch(actions.setCorrectAnswersCountStore()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
+

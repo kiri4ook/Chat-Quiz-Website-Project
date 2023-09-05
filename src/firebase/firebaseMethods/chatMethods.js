@@ -1,15 +1,15 @@
-import firestore from "../firebaseConfig";
+import firestore, { auth, Firebase } from "../firebaseConfig";
 
-export const sendMessageRequest = async () => {
+export const sendMessageRequest = async (value) => {
+    const user = auth.currentUser;
     try {
-        const messagesRef = firestore.collection('messages');
-        const querySnapshot = await messagesRef.get();
-        const messagesData = [];
-        querySnapshot.forEach((doc) => {
-            messagesData.push(doc.data());
+        await firestore.collection('messages').add({
+            uid: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            text: value,
+            createdAt: Firebase.firestore.FieldValue.serverTimestamp(),
         });
-
-        return messagesData;
     } catch (error) {
         console.error('Error sending message request:', error);
         throw error;

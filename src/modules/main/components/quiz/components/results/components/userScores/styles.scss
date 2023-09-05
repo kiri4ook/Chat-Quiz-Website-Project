@@ -1,0 +1,30 @@
+.scores-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+  
+.user-image {
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+}
+  
+.user-name {
+    display: flex;
+    padding: 0 10px;
+    color: #56bab7; 
+}
+  
+.scores {
+    margin-left: auto;
+    padding: 0 5px;
+    font-size: 20px;
+    color: white;
+}
+
+.image-wrapper {
+    display: flex;
+    align-items: center;
+}

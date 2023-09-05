@@ -1,20 +1,37 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { fetchMessagesSuccess, fetchMessagesFailure, FETCH_MESSAGES_REQUEST } from '../actions/chatActions';
-import { sendMessageRequest } from '../../firebase/firebaseMethods/chatMethods';
+import { all, put, call, fork, take, takeEvery } from 'redux-saga/effects';
+import * as eventChannels from './eventChannels';
+import * as chatMethods from '../../firebase/firebaseMethods/chatMethods'
+import * as actions from '../actions/chatActions';
 
-function* sendMessage() {
-    try {
-        const response = yield call(sendMessageRequest);
-        yield put(fetchMessagesSuccess(response));
-    } catch (error) {
-        console.error(error)
-        yield put(fetchMessagesFailure(error.message));
+const setUsersMessagesStore = payload => ({ type: actions.SET_USERS_MESSAGES_STORE, payload });
+
+
+export default function* chatSaga() {
+    yield all([
+        fork(startListener),
+        takeEvery(actions.SEND_MESSAGE, sendMessages),
+        takeEvery(actions.SET_USER_MESSAGE, setUserMessages)
+    ]);
+};
+
+export function* sendMessages({ payload }) {
+    yield call(chatMethods.sendMessageRequest, payload);
+}
+
+export function* setUserMessages({ payload }) {
+    if (payload.length) {
+        const filteredMessagesList = payload.filter(message => message.createdAt);
+
+        filteredMessagesList.length && (yield put(setUsersMessagesStore(filteredMessagesList)));
     }
 }
 
-function* messageSaga() {
-    yield takeEvery(FETCH_MESSAGES_REQUEST, sendMessage);
+export function* startListener() {
+    const chatMessagesChannel = eventChannels.chatMessagesEventChannel();
+
+    while (true) {
+        const eventAction = yield take(chatMessagesChannel);
+
+        yield put(eventAction);
+    }
 }
-
-export default messageSaga;
-

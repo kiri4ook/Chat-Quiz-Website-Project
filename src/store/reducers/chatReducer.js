@@ -1,35 +1,15 @@
-import { UPDATE_MESSAGE, FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS, FETCH_MESSAGES_FAILURE } from "../actions/chatActions";
+import * as actions from "../actions/chatActions";
 
 const initialState = {
     messages: [],
-    loading: false,
-    error: null,
 };
 
 const chatReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_MESSAGE:
+        case actions.SET_USERS_MESSAGES_STORE:
             return {
                 ...state,
-                messages: [...state.messages, action.payload],
-            };
-        case FETCH_MESSAGES_REQUEST:
-            return {
-                ...state,
-                loading: true,
-                error: null,
-            };
-        case FETCH_MESSAGES_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                messages: action.payload,
-            };
-        case FETCH_MESSAGES_FAILURE:
-            return {
-                ...state,
-                loading: false,
-                error: action.error,
+                messages: [...state.messages, ...action.payload],
             };
         default:
             return state;
