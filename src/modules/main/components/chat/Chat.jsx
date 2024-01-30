@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useLayoutEffect } from 'react';
 import UserMessage from './components/userMessage/UserMessage';
 import TextField from './components/textField/TextField';
 import { connect } from 'react-redux';
@@ -21,6 +21,10 @@ const Chat = ({
             });
         }
     }, []);
+    useLayoutEffect(() => {
+        const target = messageEl.current;
+        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+    }, [messages]);
 
     return (
         <div className="chat-container">

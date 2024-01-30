@@ -13,7 +13,7 @@ const UserMessage = ({
             <div className="message-info">
                 <img
                     src={message.photoURL}
-                    alt="User Photo"
+                    alt="User_photo"
                     className="user-photo"
                 />
                 <div className="message-name">

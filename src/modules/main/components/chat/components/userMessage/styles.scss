@@ -4,7 +4,8 @@
     align-self: flex-start;
     border-radius: 8px;
     padding: 10px 5px;
-    max-width: 60%;
+    width:auto;
+    max-width: 50%;
 }
 
 .message-info {
@@ -38,6 +39,7 @@
     width: 100%;
     height: 100%;
     padding: 17px 6px;
+    font-size: 20px;
     color: white;
     border-radius: 0 0 8px 8px;
     background: linear-gradient(4deg,#00000057,transparent);
@@ -51,4 +53,22 @@
 
 .self-message {
     margin-left: auto;
+}
+
+@media (max-width: 767px) {
+    .message-container {
+        font-size: 16px;
+    }
+    .user-message-wrapper {
+        max-width: 70%;
+    }
+}
+
+@media (max-width: 460px) {
+    .message-container {
+        font-size: 14px;
+    }
+    .user-message-wrapper {
+        max-width: 90%;
+    }
 }

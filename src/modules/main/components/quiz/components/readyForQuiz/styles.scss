@@ -29,6 +29,7 @@
   
 .custom-button:active {
     background: #56bab7;
+    color: #202026;
 }
   
 .start-button {
@@ -39,4 +40,24 @@
 .cancel-button {
     background: #56bab7;
     color: white;
+}
+
+@media (max-width: 767px) {
+    .ready-text {
+        font-size: 20px;
+    }
+    .custom-button {
+        width: 130px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 460px) {
+    .ready-text {
+        font-size: 15px;
+    }
+    .custom-button {
+        width: 100px;
+        font-size: 15px;
+    }
 }

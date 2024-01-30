@@ -12,6 +12,7 @@ const UserScores = ({
                 <img
                     src={image}
                     className="user-image"
+                    alt=''
                 />
             </div>
 

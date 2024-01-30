@@ -36,16 +36,14 @@ const TextField = ({
 
     return (
         <div className="text-field-container">
-            <div className="text-field-wrapper">
-                <textarea
-                    ref={textRef}
-                    value={value}
-                    onChange={onChangeHandler}
-                    onKeyDown={handleOnFocus}
-                    placeholder={'Send a message...'}
-                    className="text-field"
-                />
-            </div>
+            <textarea
+                ref={textRef}
+                value={value}
+                onChange={onChangeHandler}
+                onKeyDown={handleOnFocus}
+                placeholder={'Send a message...'}
+                className="text-field"
+            />
             <div
                 className="text-field-button"
                 onClick={onClickHandler}
