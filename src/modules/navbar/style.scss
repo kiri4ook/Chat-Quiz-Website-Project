@@ -1,0 +1,36 @@
+.Header {
+    width: 100vw;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    background-color: #0d121c;
+    
+}
+
+.wrapper_buttons_nav {
+    display: flex;
+    align-items: center;
+}
+.Button {
+    border: none;
+    padding: 0;
+    margin-left: 15px;
+    font-size: 30px;
+    color: azure;
+    background-color: #0d121c;
+    height: 50px;
+}
+
+.NavLink:focus {
+       color: gold;
+}
+
+@media (max-width: 460px) {
+    .Button {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+    .Header{
+        padding: 15px;
+    }
+}

@@ -1,0 +1,63 @@
+.ready-for-game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+.ready-text {
+    font-size: 30px;
+    color: white;
+    padding: 0 0 20px;
+    user-select: none;
+}
+  
+.custom-button {
+    width: 170px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 20px;
+    user-select: none;
+    border: none;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    font-size: 25px;
+    border-radius: 5px;
+}
+  
+.custom-button:active {
+    background: #56bab7;
+    color: #202026;
+}
+  
+.start-button {
+    border: 2px solid #56bab7;
+    color: #56bab7;
+}
+  
+.cancel-button {
+    background: #56bab7;
+    color: white;
+}
+
+@media (max-width: 767px) {
+    .ready-text {
+        font-size: 20px;
+    }
+    .custom-button {
+        width: 130px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 460px) {
+    .ready-text {
+        font-size: 15px;
+    }
+    .custom-button {
+        width: 100px;
+        font-size: 15px;
+    }
+}
