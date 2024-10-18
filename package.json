@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kiri4ook.github.io/Chat-Quiz-Website-Project/",
+  "homepage": "https://kiri4ook.github.io/Chat-quiz-website/",
   "dependencies": {
     "@babel/core": "^7.22.10",
     "@babel/preset-env": "^7.22.10",
