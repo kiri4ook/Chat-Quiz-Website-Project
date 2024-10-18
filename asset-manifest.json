@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Chat-Quiz-Website-Project/static/css/main.dc808b6e.css",
+    "main.js": "/Chat-Quiz-Website-Project/static/js/main.eafccb87.js",
+    "static/media/bgchat.png": "/Chat-Quiz-Website-Project/static/media/bgchat.14eb02c08deda47d7639.png",
+    "static/media/not-correct-answer-image.png": "/Chat-Quiz-Website-Project/static/media/not-correct-answer-image.374b2e258ce8389e62cf.png",
+    "static/media/correct-answer-image.svg.png": "/Chat-Quiz-Website-Project/static/media/correct-answer-image.svg.3d01f9a1aeab72efc481.png",
+    "index.html": "/Chat-Quiz-Website-Project/index.html",
+    "main.dc808b6e.css.map": "/Chat-Quiz-Website-Project/static/css/main.dc808b6e.css.map",
+    "main.eafccb87.js.map": "/Chat-Quiz-Website-Project/static/js/main.eafccb87.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dc808b6e.css",
+    "static/js/main.eafccb87.js"
+  ]
+}
